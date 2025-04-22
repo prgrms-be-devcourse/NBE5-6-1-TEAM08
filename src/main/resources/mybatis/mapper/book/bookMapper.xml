@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+  NOTE 01 Mybatis Mapper
+  1. namespace : Mapper Interface 와 일치하게 작성
+  2. Mapper Interface 에 select, insert, update, delete tag 의 id 와 일치하는 메서드 작성
+-->
+<mapper namespace="com.grepp.spring.app.model.book.BookRepository">
+
+  <resultMap id="bookMap" type="Book">
+    <id property="bkIdx" column="bk_idx"/>
+    <collection property="images" column="bk_idx" ofType="BookImg" select="selectImg" />
+  </resultMap>
+
+  <select id="selectAll" resultMap="bookMap">
+    select * from book
+  </select>
+
+  <select id="selectPaged" resultMap="bookMap">
+    select * from book order by created_at desc limit #{start}, #{offset}
+  </select>
+
+  <select id="selectImg" parameterType="int" resultType="BookImg">
+    select * from book_img where bk_idx = #{bkIdx}
+  </select>
+
+  <select id="recentRentBook">
+    select * from book b
+    join rent_book rb using(bk_idx)
+    order by rb.created_at desc
+    limit #{n}
+  </select>
+
+  <select id="selectByIf">
+    select * from book
+    where activated = true
+    <if test="search == 'title'">
+      and title like concat('%', #{keyword}, '%')
+    </if>
+    <if test="search == 'author'">
+      and author like concat('%', #{keyword}, '%')
+    </if>
+    <if test="search == 'info'">
+      and info like concat('%', #{keyword}, '%')
+    </if>
+    order by created_at desc
+    limit 5
+  </select>
+
+  <select id="selectByChooseWhen">
+    select * from book
+    where activated = true
+    <choose>
+      <when test="search == 'title'">
+        and title like concat('%', #{keyword}, '%')
+      </when>
+      <when test="search == 'author'">
+        and author like concat('%', #{keyword}, '%')
+      </when>
+      <otherwise>
+        and info like concat('%', #{keyword}, '%')
+      </otherwise>
+    </choose>
+    order by created_at desc
+    limit 5
+  </select>
+
+  <!--
+    NOTE 02 : dynamic query
+    매개변수가 List 인 경우, {list=books}
+  -->
+  <insert id="bulkInsert">
+    insert into book(category, title, author, info)
+    values
+    <foreach collection="list" item="book" separator=",">
+      (#{book.category}, #{book.title}, #{book.author}, #{book.info})
+    </foreach>
+  </insert>
+
+  <select id="selectDynamic">
+    select * from book
+    <where>
+      <foreach collection="searches" item="search">
+        <if test="search == 'rentable'">
+          amount > 0
+        </if>
+        <if test="search == 'title'">
+          or title like concat('%', #{keyword}, '%')
+        </if>
+        <if test="search == 'author'">
+          or author like concat('%', #{keyword}, '%')
+        </if>
+      </foreach>
+    </where>
+  </select>
+
+</mapper>

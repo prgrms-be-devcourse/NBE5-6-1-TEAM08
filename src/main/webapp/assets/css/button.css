@@ -1,0 +1,72 @@
+/*
+  CSS 명명 규칙
+  BEM Block - Element - Modifier
+  Block : 재사용 가능한 컴포넌트
+  Element : Block 안에서만 의미를 가지는 Block 의 구성 요소
+  Modifier : Block, Element 의 속성(상태)
+
+  Block__Element--Modifier
+  합성어의 경우 - 로 연결
+  ex) search-form
+  ex) search-form__inp--red
+
+  shorter BEM
+  합성어를 camelcase로 변경
+  ex) searchForm_inp-red
+
+  <div class="loginBtn btn-red">
+     <div class="loginBtn_logo">
+        <img class="logo"/>
+     </div>
+     <div class="loginBtn_txt">
+        <p class="tit"></p>
+     </div>
+  </div>
+
+  Block : loginBtn, logo, tit
+  Element : loginBtn_logo(logo), loginBtn_txt(txt)
+  Modifier : btn-red(red)
+*/
+
+.btn {
+  border-style: outset;
+  border-radius: 20px;
+  border-width: 0.2rem;
+  margin: 10px;
+  overflow: hidden;
+}
+
+.btn-l {
+  width: 12rem;
+  height: 4rem;
+  font-size: 1rem;
+}
+
+.btn-m {
+  width: 6rem;
+  height: 2rem;
+  font-size: 1rem;
+}
+
+.btn-s {
+  width: 4rem;
+  height: 2rem;
+  font-size: 1rem;
+}
+
+.btn-red {
+  background-color: lightcoral;
+}
+
+.btn-blue {
+  background-color: lightblue;
+}
+
+.btn-green {
+  background-color: lightgreen;
+}
+
+.btn:hover {
+  border-style: inset;
+  color: blue;
+}
