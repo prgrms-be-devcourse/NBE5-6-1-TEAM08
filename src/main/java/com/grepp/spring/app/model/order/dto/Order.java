@@ -6,8 +6,8 @@ import lombok.Data;
 import org.apache.ibatis.type.Alias;
 
 @Data
-@Alias("Orders")
-public class Orders {
+@Alias("Order")
+public class Order {
     private String productName;
     private String email;
     private String userId;

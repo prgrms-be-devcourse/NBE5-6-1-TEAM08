@@ -4,10 +4,10 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.grepp.spring.app.model.user.MemberRepository">
 
-  <resultMap id="memberMap" type="Member">
+  <resultMap id="orderMap" type="Order">
     <id property="userId" column="user_id"/>
     <!-- 1대 1 관계일 때는 association / javaType-->
-    <association property="info" javaType="MemberInfo" column="user_id" select="selectInfoById"/>
+
   </resultMap>
 
   <select id="selectById" resultMap="memberMap">

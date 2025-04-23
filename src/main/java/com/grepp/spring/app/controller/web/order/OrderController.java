@@ -2,7 +2,7 @@ package com.grepp.spring.app.controller.web.order;
 
 
 import com.grepp.spring.app.model.order.OrderService;
-import com.grepp.spring.app.model.order.dto.Orders;
+import com.grepp.spring.app.model.order.dto.Order;
 import com.grepp.spring.app.model.user.dto.Principal;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -23,12 +23,14 @@ public class OrderController {
 
     private final OrderService orderService;
 
+
+    // 회원 주문 조회
     @GetMapping("/check")
     public String checkOrderForm(Model model, Principal principal) {
         if (principal != null) {
             // 로그인 사용자
             String userId = principal.userId(); // Spring Security 사용 시
-            List<Orders> orders = orderService.getOrdersById(userId);
+            List<Order> orders = orderService.getOrdersById(userId);
             model.addAttribute("orders", orders);
             return "order/orderList";
         } else {
@@ -37,13 +39,21 @@ public class OrderController {
         }
     }
 
+    // 비회원 주문 조회
     @PostMapping("/check")
     public String checkOrderByEmail(
         @RequestParam String email,
         Model model
     ){
-        List<Orders> orders = orderService.getOrdersByEmail(email);
-        model.addAttribute("orders", orders);
+        List<Order> orders = orderService.getOrdersByEmail(email);
+        model.addAttribute("email orders", orders);
+        return "order/orderList";
+    }
+
+    @GetMapping("/admin")
+    public String checkAllOrderForm(Model model) {
+        List<Order> orders = orderService.getAllOrders();
+        model.addAttribute("all user orders", orders);
         return "order/orderList";
     }
 }

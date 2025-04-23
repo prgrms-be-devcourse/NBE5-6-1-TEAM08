@@ -1,6 +1,6 @@
 package com.grepp.spring.app.model.order;
 
-import com.grepp.spring.app.model.order.dto.Orders;
+import com.grepp.spring.app.model.order.dto.Order;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,12 +13,16 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
 
-    public List<Orders> getOrdersById(String id) {
+    public List<Order> getOrdersById(String id) {
         return orderRepository.findById(id);
     }
 
-    public List<Orders> getOrdersByEmail(String email) {
+    public List<Order> getOrdersByEmail(String email) {
         return orderRepository.findByEmail(email);
+    }
+
+    public List<Order> getAllOrders() {
+        return orderRepository.findAll();
     }
 
 }

@@ -1,15 +1,20 @@
 package com.grepp.spring.app.model.order;
 
-import com.grepp.spring.app.model.order.dto.Orders;
+import com.grepp.spring.app.model.order.dto.Order;
 import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
+@Mapper
 public interface OrderRepository {
 
     @Select("select * from order where user_id = #{id}")
-    List<Orders> findById(String id);
+    List<Order> findById(String id);
 
     @Select("select * from order where email = #{email}")
-    List<Orders> findByEmail(String email);
+    List<Order> findByEmail(String email);
 
+    @Select("select * from order")
+    List<Order> findAll();
 }
