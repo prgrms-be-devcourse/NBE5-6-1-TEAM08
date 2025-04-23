@@ -11,7 +11,7 @@
       ** : 모든 하위 뎁스의 모든 경로
    -->
   <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
-    <property name="typeAliasesPackage" value="com.grepp.spring.app.model.member.dto, com.grepp.spring.app.model.book" />
+    <property name="typeAliasesPackage" value="com.grepp.spring.app.model.user.dto, com.grepp.spring.app.model.book" />
     <property name="dataSource" ref="dataSource"/>
     <!--
       classpath  :  현재 프로젝트의 resource 만 탐색
