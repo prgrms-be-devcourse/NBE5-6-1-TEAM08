@@ -24,6 +24,17 @@
         <version>3.13.0</version>
       </plugin>
     </plugins>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*.properties</include>
+          <include>**/*.yml</include>
+          <include>**/*.xml</include>
+          <include>**/*.sql</include> <!-- 이거 중요!! -->
+        </includes>
+      </resource>
+    </resources>
   </build>
   <dependencies>
 
