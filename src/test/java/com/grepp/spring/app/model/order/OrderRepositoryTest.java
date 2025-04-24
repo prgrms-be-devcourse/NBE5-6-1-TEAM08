@@ -23,5 +23,11 @@ class OrderRepositoryTest {
     @Test
     public void findById() {log.info("{}", orderRepository.findById("test"));}
 
+    @Test
+    public void findByEmail() {log.info("{}", orderRepository.findByEmail("test@test"));}
+
+    @Test
+    public void findAll() {log.info("{}", orderRepository.findAll());}
+
 
 }

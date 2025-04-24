@@ -10,16 +10,16 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface OrderRepository {
 
-    @Select("select * from order where user_id = #{id}")
+    @Select("select * from `order` where user_id = #{id}")
     List<Order> findById(String id);
 
-    @Select("select * from order where email = #{email}")
+    @Select("select * from `order` where email = #{email}")
     List<Order> findByEmail(String email);
 
-    @Select("select * from order")
+    @Select("select * from `order`")
     List<Order> findAll();
 
-    @Delete("delete from order where email = #{email}")
+    @Delete("delete from `order` where email = #{email}")
     void deleteByEmail(String email);
 
 }
