@@ -188,6 +188,30 @@
       <version>5.17.0</version>
       <scope>test</scope>
     </dependency>
+
+
+    <!-- Spring Security -->
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-web</artifactId>
+      <version>${spring-security.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-config</artifactId>
+      <version>${spring-security.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-test</artifactId>
+      <version>${spring-security.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-taglibs</artifactId>
+      <version>${spring-security.version}</version>
+    </dependency>
   </dependencies>
   <groupId>com.grepp</groupId>
   <modelVersion>4.0.0</modelVersion>
@@ -203,6 +227,7 @@
     <!--  spring  -->
     <hikaricp.version>5.1.0</hikaricp.version>
     <jackson.version>2.15.3</jackson.version>
+    <spring-security.version>6.4.4</spring-security.version>
     <!--  logging  -->
     <jakarta-jstl-api.version>3.0.2</jakarta-jstl-api.version>
     <jakarta-jstl.version>3.0.1</jakarta-jstl.version>

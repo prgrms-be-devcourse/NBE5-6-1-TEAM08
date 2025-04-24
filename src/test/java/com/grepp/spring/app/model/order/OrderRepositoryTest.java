@@ -21,7 +21,7 @@ class OrderRepositoryTest {
     private OrderRepository orderRepository;
 
     @Test
-    public void findById() {log.info("{}", orderRepository.findById("test"));}
+    public void findById() {log.info("{}", orderRepository.findById("test2"));}
 
     @Test
     public void findByEmail() {log.info("{}", orderRepository.findByEmail("test@test"));}
@@ -29,5 +29,10 @@ class OrderRepositoryTest {
     @Test
     public void findAll() {log.info("{}", orderRepository.findAll());}
 
+    @Test
+    public void deleteByEmail() {
+        orderRepository.deleteByEmail("test@test");
+        log.info("Deleted orders by email : test@test");
+    }
 
 }
