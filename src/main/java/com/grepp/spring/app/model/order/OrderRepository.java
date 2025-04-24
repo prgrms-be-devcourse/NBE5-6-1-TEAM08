@@ -2,6 +2,7 @@ package com.grepp.spring.app.model.order;
 
 import com.grepp.spring.app.model.order.dto.Order;
 import java.util.List;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
@@ -17,4 +18,8 @@ public interface OrderRepository {
 
     @Select("select * from order")
     List<Order> findAll();
+
+    @Delete("delete from order where email = #{email}")
+    void deleteByEmail(String email);
+
 }

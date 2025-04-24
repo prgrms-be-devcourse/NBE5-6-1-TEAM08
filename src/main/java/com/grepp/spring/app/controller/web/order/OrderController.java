@@ -46,14 +46,14 @@ public class OrderController {
         Model model
     ){
         List<Order> orders = orderService.getOrdersByEmail(email);
-        model.addAttribute("email orders", orders);
+        model.addAttribute("emailOrders", orders);
         return "order/orderList";
     }
 
     @GetMapping("/admin")
     public String checkAllOrderForm(Model model) {
         List<Order> orders = orderService.getAllOrders();
-        model.addAttribute("all user orders", orders);
+        model.addAttribute("allOrders", orders);
         return "order/orderList";
     }
 }

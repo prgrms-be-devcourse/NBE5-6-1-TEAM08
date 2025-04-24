@@ -25,4 +25,8 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
+    public void deleteOrder(String email) {
+        orderRepository.deleteByEmail(email);
+    }
+
 }
