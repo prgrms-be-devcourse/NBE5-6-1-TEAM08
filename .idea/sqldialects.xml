@@ -2,8 +2,8 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/src/main/resources/init/data.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/init/order_data.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/src/main/resources/init/order_schema.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/src/main/resources/init/schema-prod.sql" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/init/schema.sql" dialect="MySQL" />
   </component>
 </project>
