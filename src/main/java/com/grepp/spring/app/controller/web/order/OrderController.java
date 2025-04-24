@@ -29,7 +29,7 @@ public class OrderController {
     public String checkOrderForm(Model model, Principal principal) {
         if (principal != null) {
             // 로그인 사용자
-            String userId = principal.userId(); // Spring Security 사용 시
+            String userId = principal.userId();
             List<Order> orders = orderService.getOrdersById(userId);
             model.addAttribute("orders", orders);
             return "order/orderList";
