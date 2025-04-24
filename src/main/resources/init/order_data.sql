@@ -1,10 +1,10 @@
-insert into `order`(product_name, email, user_id, order_cnt, order_date)
+insert into orders(product_name, email, user_id, order_cnt, order_date)
 values ('Hawaian_Cona', 'test@test', 'test', 2, '2025-04-24 15:30:26');
-insert into `order` (product_name, email, user_id, order_cnt, order_date)
+insert into orders (product_name, email, user_id, order_cnt, order_date)
 values ('Blue_mountain', 'test2test', 'test2', 1, '2025-04-12 19:30:26');
-insert into `order` (product_name, email, user_id, order_cnt, order_date)
+insert into orders (product_name, email, user_id, order_cnt, order_date)
 values ('ethiopia', 'test3@test', 'test3', 7, '2025-03-24 18:21:10');
-insert into `order` (product_name, email, user_id, order_cnt, order_date)
+insert into orders (product_name, email, user_id, order_cnt, order_date)
 values ('korea', 'test@test', 'test4', 2, '2025-04-24 13:22:33');
 
 insert into product(product_id, product_name, productInfo, price, stock_cnt)
