@@ -11,5 +11,5 @@ public class Order {
     private String email;
     private String userId;
     private Integer orderCnt;
-    private LocalDateTime orderTime;
+    private LocalDateTime orderDate;
 }

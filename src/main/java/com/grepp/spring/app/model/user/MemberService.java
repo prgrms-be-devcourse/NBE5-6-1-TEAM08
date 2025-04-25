@@ -26,7 +26,7 @@ public class MemberService {
         if (memberRepository.existMember(dto.getUserId()))
             throw new CommonException(ResponseCode.BAD_REQUEST);
 
-        dto.setRole(Role.ROLE_USER);
+        dto.setRole(Role.USER);
         memberRepository.insert(dto);
         MemberInfo memberInfo = new MemberInfo();
         memberInfo.setUserId(dto.getUserId());
@@ -43,7 +43,7 @@ public class MemberService {
             return Principal.ANONYMOUS;
         }
 
-        return new Principal(userId, List.of(Role.ROLE_USER), LocalDateTime.now());
+        return new Principal(userId, List.of(Role.USER), LocalDateTime.now());
     }
 
     public Boolean isDuplicatedId(String id) {

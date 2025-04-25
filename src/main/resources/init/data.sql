@@ -14,7 +14,7 @@ values ('jpa', 'jpa@jpa.com', 'ROLE_USER', '1234', '010-0112-0119', '2023-03-06 
 insert into member(user_id, email, role, password, tel, created_at)
 values ('sec', 'sec@sec.com', 'ROLE_USER', '1234', '010-0112-0120', '2023-04-06 3:02:40');
 insert into member(user_id, email, role, password, tel, created_at)
-values ('boot', 'boot@boot.com', 'ROLE_ADMIN', '1234', '010-0112-0121', '2025-03-06 3:02:40');
+values ('boot', 'boot@boot.com', 'ADMIN', '1234', '010-0112-0121', '2025-03-06 3:02:40');
 insert into member(user_id, email, role, password, tel, created_at)
 values ('test', 'test@test.com', 'ROLE_USER', '1234', '010-0112-0122', '2025-04-06 3:02:40');
 

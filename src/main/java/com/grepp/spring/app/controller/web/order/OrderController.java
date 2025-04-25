@@ -3,10 +3,12 @@ package com.grepp.spring.app.controller.web.order;
 
 import com.grepp.spring.app.model.order.OrderService;
 import com.grepp.spring.app.model.order.dto.Order;
+import com.grepp.spring.app.model.user.code.Role;
 import com.grepp.spring.app.model.user.dto.Principal;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +27,7 @@ public class OrderController {
 
 
     // 회원 주문 조회
+    @PreAuthorize("hasAuthority('USER')")
     @GetMapping("/check")
     public String checkOrderForm(Model model, Principal principal) {
         if (principal != null) {
@@ -50,6 +53,7 @@ public class OrderController {
         return "order/orderList";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/admin")
     public String checkAllOrderForm(Model model) {
         List<Order> orders = orderService.getAllOrders();

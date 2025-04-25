@@ -27,8 +27,8 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
-    @Value("${remember-me.key}")
-    private String rememberMeKey;
+//    @Value("${remember-me.key}")
+//    private String rememberMeKey;
 
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
@@ -47,7 +47,7 @@ public class SecurityConfig {
                 boolean isAdmin = authentication.getAuthorities()
                     .stream()
                     .anyMatch(authority ->
-                        authority.getAuthority().equals("ROLE_ADMIN"));
+                        authority.getAuthority().equals("ADMIN"));
 
                 if(isAdmin){
                     response.sendRedirect("/admin");
@@ -69,10 +69,8 @@ public class SecurityConfig {
             .authorizeHttpRequests(
                 (requests) -> requests
                     .requestMatchers(GET, "/", "/assets/**", "/download/**").permitAll()
-                    .requestMatchers(GET, "/book/list").permitAll()
                     .requestMatchers(GET, "/api/member/exists/*").permitAll()
-                    .requestMatchers(GET, "/member/signup").permitAll()
-                    .requestMatchers(GET, "/member/signin").permitAll()
+                    .requestMatchers(GET, "/member/signup", "/member/signin").permitAll()
                     .requestMatchers(POST, "/member/signin", "/member/signup").permitAll()
                     .anyRequest().authenticated()
             )
@@ -84,7 +82,7 @@ public class SecurityConfig {
                 .successHandler(successHandler())
                 .permitAll()
             )
-            .rememberMe(rememberMe -> rememberMe.key(rememberMeKey))
+//            .rememberMe(rememberMe -> rememberMe.key(rememberMeKey))
             .logout(LogoutConfigurer::permitAll);
 
         return http.build();
