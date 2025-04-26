@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grepp.spring.app.model.order.OrderRepository">
+
+  <resultMap id="orderMap" type="com.grepp.spring.app.model.order.dto.Order">
+  <result property="productName" column="product_name" />
+  <result property="email" column="email" />
+  <result property="userId" column="user_id" />
+  <result property="orderCnt" column="order_cnt" />
+  <result property="orderDate" column="order_date" />
+</resultMap>
+  
+  <select id="findById" resultMap="orderMap">
+    select * from orders where user_id = #{id}
+  </select>
+  
+  <select id="findByEmail" resultMap="orderMap">
+    select * from orders where email = #{email}
+  </select>
+
+  <select id="findAll" resultMap="orderMap">
+    select * from orders
+  </select>
+
+
+
+</mapper>
