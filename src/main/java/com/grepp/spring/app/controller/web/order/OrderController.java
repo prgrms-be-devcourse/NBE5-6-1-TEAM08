@@ -3,7 +3,6 @@ package com.grepp.spring.app.controller.web.order;
 
 import com.grepp.spring.app.model.order.OrderService;
 import com.grepp.spring.app.model.order.dto.Order;
-import com.grepp.spring.app.model.user.code.Role;
 import com.grepp.spring.app.model.user.dto.Principal;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -55,7 +54,7 @@ public class OrderController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/admin")
-    public String checkAllOrderForm(Model model) {
+    public String checkAllOrder(Model model) {
         List<Order> orders = orderService.getAllOrders();
         model.addAttribute("allOrders", orders);
         return "order/orderList";
