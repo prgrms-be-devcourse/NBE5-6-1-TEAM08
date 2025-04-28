@@ -1,0 +1,118 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f1ece2;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  background-color: #e3ded5;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  height:6vh;
+}
+
+.logo {
+  transform: translateX(-50%);
+  position: absolute;
+  left: 50%;
+}
+
+.logo img {
+  height: 60px;
+}
+
+.banner {
+  position: relative;
+  text-align: center;
+  margin-top: 0px;
+}
+
+.banner img {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+}
+
+.banner-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Merriweather', serif;
+  font-size: 36px;
+  font-weight: normal;
+  color: #e3ded5;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 1);
+}
+
+.welcome-message {
+  text-align: center;
+  font-family: 'Merriweather', serif;
+  font-size: 15px;
+  font-weight: lighter;
+  margin-top: 35px;
+  color: #000000;
+}
+
+.buttons a {
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: #6a6a6a;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.buttons a:hover {
+  background-color: transparent;
+  color: black;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  padding: 40px;
+}
+
+.product {
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  background-color: #fff;
+  transition: transform 0.3s ease;
+}
+
+.product:hover {
+  transform: scale(1.05);
+}
+
+.product img {
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+  object-fit: contain;
+  display: block;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #FFF;
+}
+
+.product-title {
+  padding: 15px 10px;
+  font-size: 17px;
+  font-family: 'Merriweather', serif;
+  font-weight: normal;
+  color: #333333;
+  text-decoration: none;
+}
+
