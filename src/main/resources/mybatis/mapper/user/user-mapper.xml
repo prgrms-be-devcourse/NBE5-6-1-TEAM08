@@ -6,9 +6,9 @@
 <mapper namespace="com.grepp.spring.app.model.user.UserMapper">
 
   <!-- 회원 등록 -->
-  <insert id="insertUser" parameterType="User">
-    INSERT INTO user (username, email, phone, password, role)
-    VALUES (#{username}, #{email}, #{phone}, #{password}, #{role})
+  <insert id="insertUser" parameterType="com.grepp.spring.app.model.user.dto.User">
+    INSERT INTO user (username, password, email, role, phone, created_at)
+    VALUES (#{username}, #{password}, #{email}, #{role}, #{phone}, NOW())
   </insert>
 
   <!-- 중복 체크 -->
@@ -25,19 +25,27 @@
   </select>
 
   <!-- 사용자 조회 (로그인, 수정 시 사용) -->
-  <select id="findByUsername" resultType="User">
-    SELECT * FROM user WHERE username = #{username}
+  <select id="findByUsername" resultType="com.grepp.spring.app.model.user.dto.User">
+    SELECT 
+      username,
+      password,
+      email,
+      role,
+      phone,
+      created_at as createdAt
+    FROM user 
+    WHERE username = #{username}
   </select>
 
   <!-- 사용자 정보 수정 (이메일, 전화번호만) -->
-  <update id="update" parameterType="User">
+  <update id="update" parameterType="com.grepp.spring.app.model.user.dto.User">
     UPDATE user
     SET email = #{email},
         phone = #{phone}
     WHERE username = #{username}
   </update>
 
-  <update id="updatePassword" parameterType="User">
+  <update id="updatePassword" parameterType="com.grepp.spring.app.model.user.dto.User">
     UPDATE user
     SET password = #{password}
     WHERE username = #{username}

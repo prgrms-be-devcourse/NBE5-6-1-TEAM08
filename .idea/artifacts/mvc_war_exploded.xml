@@ -52,6 +52,7 @@
         </element>
       </element>
       <element id="javaee-facet-resources" facet="mvc/web/Web" />
+      <element id="javaee-facet-resources" facet="mvc/web/Web2" />
     </root>
   </artifact>
 </component>

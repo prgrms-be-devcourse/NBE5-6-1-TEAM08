@@ -4,15 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <title>Grids & Circle - 비회원 로그인</title>
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/login.css">
 </head>
 <body>
 
 <div class="login-container">
-  <a href="<%= request.getContextPath() %>/index.jsp">
-    <img src="<%= request.getContextPath() %>/img/logo.png" alt="Grids & Circle 로고">
+  <a href="${pageContext.request.contextPath}/">
+    <img src="${pageContext.request.contextPath}/assets/img/logo.png" alt="Grids & Circle 로고">
   </a>
 
-  <form action="<%= request.getContextPath() %>/guest-login" method="post">
+  <form action="${pageContext.request.contextPath}/guest_login" method="post">
     <div class="input-box">
       <input type="email" name="guestEmail" placeholder="E-mail" required>
     </div>

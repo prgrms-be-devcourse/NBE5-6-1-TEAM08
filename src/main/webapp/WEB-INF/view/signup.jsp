@@ -4,12 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Grids & Circle - 회원가입</title>
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/login.css">
 </head>
 <body>
 
 <div class="login-container">
-  <a href="index.jsp">
-    <img src="img/logo.png" alt="Grids & Circle 로고">
+  <a href="${pageContext.request.contextPath}/">
+    <img src="${pageContext.request.contextPath}/assets/img/logo.png" alt="Grids & Circle 로고">
   </a>
 
   <div class="title-text">회원가입</div>
@@ -18,10 +19,9 @@
   <p style="color:red;"><%= request.getAttribute("error") %></p>
   <% } %>
 
-  <!--  form 수정: action 삭제, onsubmit으로 fetch 요청 -->
   <form id="signupForm" onsubmit="submitSignupForm(); return false;">
     <div class="input-box">
-      <input type="text" name="userid" id="userid" placeholder="ID" required>
+      <input type="text" name="username" id="username" placeholder="ID" required>
       <button type="button" class="id-check-btn" onclick="checkDuplicateId()">중복확인</button>
     </div>
     <div class="input-box">
@@ -31,34 +31,29 @@
       <input type="email" name="email" id="email" placeholder="Email" required>
     </div>
     <div class="input-box">
-      <input type="text" name="address" id="address" placeholder="주소" required>
-    </div>
-    <div class="input-box">
-      <input type="text" name="postnum" id="postnum" placeholder="우편번호" required>
-    </div>
-    <div class="input-box">
-      <input type="text" name="tel" id="tel" placeholder="전화번호" required>
+      <input type="text" name="phone" id="phone" placeholder="전화번호" required>
     </div>
     <button type="submit" class="login-btn">회원가입</button>
   </form>
 
-  <a href="/login" class="signup-link">이미 계정이 있으신가요? 로그인</a>
+  <a href="${pageContext.request.contextPath}/login" class="signup-link">이미 계정이 있으신가요? 로그인</a>
 </div>
 
 <script>
+  const contextPath = '${pageContext.request.contextPath}';
   let isIdChecked = false;
 
   async function checkDuplicateId() {
-    const userId = document.getElementById('userid').value.trim();
+    const username = document.getElementById('username').value.trim();
 
-    if (!userId) {
+    if (!username) {
       alert('ID를 입력해주세요.');
       return;
     }
 
     try {
-      const res = await fetch(`/api/users/check-id?username=${encodeURIComponent(userId)}`);
-      const data = await res.text(); // (서버가 문자열을 리턴하니까)
+      const res = await fetch(`${contextPath}/api/users/check-id?username=${encodeURIComponent(username)}`);
+      const data = await res.text();
 
       alert(data.includes('가능') ? '사용 가능한 ID입니다.' : '이미 사용 중인 ID입니다.');
       isIdChecked = data.includes('가능');
@@ -75,16 +70,14 @@
     }
 
     const userData = {
-      username: document.getElementById('userid').value.trim(),
+      username: document.getElementById('username').value.trim(),
       password: document.getElementById('password').value.trim(),
       email: document.getElementById('email').value.trim(),
-      address: document.getElementById('address').value.trim(),
-      postnum: document.getElementById('postnum').value.trim(),
-      tel: document.getElementById('tel').value.trim()
+      phone: document.getElementById('phone').value.trim()
     };
 
     try {
-      const res = await fetch('/api/users/register', {
+      const res = await fetch(`${contextPath}/api/users/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -94,7 +87,7 @@
 
       if (res.ok) {
         alert('회원가입 성공!');
-        window.location.href = '/login';
+        window.location.href = `${contextPath}/login`;
       } else {
         const errorMessage = await res.text();
         alert('회원가입 실패: ' + errorMessage);

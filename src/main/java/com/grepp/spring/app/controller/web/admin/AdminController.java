@@ -7,11 +7,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class AdminController {
 
-    @GetMapping("/admin_orderlist")
-    public String adminOrderlist() {
-        return "admin_orderlist";
-    }
-
     @GetMapping("/api/admin/test")
     @ResponseBody
     public String adminOnly() {

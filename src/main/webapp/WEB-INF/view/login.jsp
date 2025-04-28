@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,16 +10,16 @@
 <body>
 
 <div class="login-container">
-  <a href="<%= request.getContextPath() %>/index.jsp">
-    <img src="<%= request.getContextPath() %>/img/logo.png" alt="Grids & Circle 로고">
+  <a href="${pageContext.request.contextPath}/">
+    <img src="${pageContext.request.contextPath}/assets/img/logo.png" alt="Grids & Circle 로고">
   </a>
 
-  <form action="<%= request.getContextPath() %>/login" method="post">
+  <form action="${pageContext.request.contextPath}/login" method="post">
     <div class="input-box">
-      <input type="text" name="userId" placeholder="ID" required>
+      <input type="text" name="username" placeholder="ID" required>
     </div>
     <div class="input-box">
-      <input type="password" name="passWord" placeholder="Password" required>
+      <input type="password" name="password" placeholder="Password" required>
     </div>
 
     <div class="login-options">
@@ -32,7 +33,7 @@
 
   <div class="links">
     <a href="${pageContext.request.contextPath}/signup" class="signup-link">JOIN US</a>
-    <a href="<%= request.getContextPath() %>/guest_login.jsp" class="signup-link" style="font-size: 13px; color: #555;">비회원 로그인</a>
+    <a href="${pageContext.request.contextPath}/guest_login" class="signup-link" style="font-size: 13px; color: #555;">비회원 로그인</a>
   </div>
 
   <%-- 로그인 실패 시 에러메시지 표시 --%>
