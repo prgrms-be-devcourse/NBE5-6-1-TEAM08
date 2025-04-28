@@ -31,8 +31,8 @@ class OrderRepositoryTest {
 
     @Test
     public void deleteByEmail() {
-        orderRepository.deleteByEmail("test@test");
-        log.info("Deleted orders by email : test@test");
+        orderRepository.deleteByEmail("test3@test");
+        log.info("Deleted orders by email : test3@test");
     }
 
 }

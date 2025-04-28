@@ -57,6 +57,6 @@ public class OrderController {
     public String checkAllOrder(Model model) {
         List<Order> orders = orderService.getAllOrders();
         model.addAttribute("allOrders", orders);
-        return "order/orderList";
+        return "order/allOrderList";
     }
 }

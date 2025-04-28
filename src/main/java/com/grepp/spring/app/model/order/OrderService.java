@@ -23,7 +23,7 @@ public class OrderService {
     }
 
     public List<Order> getOrdersByEmail(String email) {
-        List<Order> orders = orderRepository.findById(email);
+        List<Order> orders = orderRepository.findByEmail(email);
         if (orders == null || orders.isEmpty()) {
             throw new OrderNotFoundException("해당 ID로 주문을 찾을 수 없습니다: " + email);
         }
@@ -35,7 +35,7 @@ public class OrderService {
     }
 
     public void deleteOrder(String email) {
-        List<Order> orders = orderRepository.findById(email);
+        List<Order> orders = orderRepository.findByEmail(email);
         if (orders == null || orders.isEmpty()) {
             throw new OrderNotFoundException("삭제할 주문이 없습니다.: " + email);
         }
