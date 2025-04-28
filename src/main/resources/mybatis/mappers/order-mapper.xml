@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grepp.spring.app.model.order.OrderRepository">
+
+<select id="selectAllWithPriceAndProductInfoByEmail"
+        parameterType="string">
+  select o.product_Name, o.email, o.user_Id, o.order_Cnt, o.order_Date
+          , p.price, p.product_Info, p.product_Id
+  from orders o
+  join product p using (product_name)
+  where o.email = #{email}
+</select>
+
+</mapper>
+
+
+

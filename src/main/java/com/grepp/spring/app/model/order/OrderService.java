@@ -1,6 +1,7 @@
 package com.grepp.spring.app.model.order;
 
 import com.grepp.spring.app.model.order.dto.Order;
+import com.grepp.spring.app.model.order.dto.OrderInfo;
 import com.grepp.spring.infra.error.exceptions.CommonException;
 import com.grepp.spring.infra.response.ResponseCode;
 import java.util.List;
@@ -27,8 +28,9 @@ public class OrderService {
     }
 
     // 주문 삭제 (userId or email)
-    public boolean deleteByEmail(String email){
-        return orderRepository.deleteOrder(email);
+    @Transactional
+    public boolean deleteByEmailAndProductName(String productName, String email){
+        return orderRepository.deleteOrder(productName, email);
     }
 
     // 주문 수정
@@ -41,8 +43,9 @@ public class OrderService {
         return orderRepository.selectAll();
     }
 
-    public List<Order> selectByEmail(String email) {
-        return orderRepository.selectByEmail(email);
+
+    public List<OrderInfo> selectAllWithPriceAndProductInfoByEmail(String email) {
+        return orderRepository.selectAllWithPriceAndProductInfoByEmail(email);
     }
 
 }
