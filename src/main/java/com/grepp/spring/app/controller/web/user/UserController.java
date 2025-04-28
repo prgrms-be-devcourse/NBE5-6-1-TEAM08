@@ -9,22 +9,52 @@ import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-@RestController
-@RequestMapping("/api/users")
+@Controller
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("/register")
+    @GetMapping({"/login", "/login.jsp"})
+    public String loginPage() {
+        return "login";
+    }
+
+    @GetMapping({"/guest_login", "/guest_login.jsp"})
+    public String guestLoginPage() {
+        return "guest_login";
+    }
+
+    @GetMapping({"/signup", "/signup.jsp"})
+    public String signupPage() {
+        return "signup";
+    }
+
+    @GetMapping({"/mypage", "/mypage.jsp"})
+    public String mypage() {
+        return "mypage";
+    }
+
+    @GetMapping({"/userEdit", "/userEdit.jsp"})
+    public String userEditPage() {
+        return "userEdit";
+    }
+
+    @GetMapping({"/userOrderlist", "/userOrderlist.jsp"})
+    public String userOrderlist() {
+        return "userOrderlist";
+    }
+
+    @PostMapping("/api/users/register")
+    @ResponseBody
     public ResponseEntity<String> register(@RequestBody User user) {
         try {
             userService.register(user);
@@ -34,26 +64,28 @@ public class UserController {
         }
     }
 
-    // 아이디 중복 검사용
-    @GetMapping("/check-id")
+    @GetMapping("/api/users/check-id")
+    @ResponseBody
     public ResponseEntity<String> checkUsernameDuplicate(@RequestParam String username) {
         return ResponseEntity.ok("사용 가능한 아이디입니다.");
     }
 
-    @PostMapping("/login")
+    @PostMapping("/api/users/login")
+    @ResponseBody
     public ResponseEntity<?> login(@RequestBody Map<String, String> loginData) {
         try {
             String username = loginData.get("username");
             String password = loginData.get("password");
 
             User user = userService.login(username, password);
-            return ResponseEntity.ok(user); // 실제 서비스에선 JWT나 세션 처리 예정
+            return ResponseEntity.ok(user);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body("로그인 실패: " + e.getMessage());
         }
     }
 
-    @GetMapping("/mypage")
+    @GetMapping("/api/users/mypage")
+    @ResponseBody
     public ResponseEntity<UserResponseDto> getMyInfo(Authentication authentication) {
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         User user = userDetails.getUser();
@@ -67,14 +99,16 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
-    @PatchMapping("/mypage")
+    @PatchMapping("/api/users/mypage")
+    @ResponseBody
     public ResponseEntity<String> updateMyInfo(@RequestBody UserUpdateRequestDto dto, Authentication authentication) {
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         userService.updateUser(userDetails.getUser().getUsername(), dto);
         return ResponseEntity.ok("회원정보 수정 완료");
     }
 
-    @PostMapping("/mypage/password")
+    @PostMapping("/api/users/mypage/password")
+    @ResponseBody
     public ResponseEntity<?> changePassword(
         @RequestBody Map<String, String> pwData,
         Authentication authentication

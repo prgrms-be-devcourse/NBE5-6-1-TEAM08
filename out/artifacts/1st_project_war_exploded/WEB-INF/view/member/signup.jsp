@@ -1,95 +1,81 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html lang="ko">
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@include file="/WEB-INF/view/include/page.jsp" %>
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Grids & Circle - 회원가입</title>
-  <link rel="stylesheet" href="/assets/css/signup.css">
+    <title>Grepp</title>
+    <%@include file="/WEB-INF/view/include/static.jsp" %>
 </head>
 <body>
+<%@include file="/WEB-INF/view/include/header.jsp" %>
+<%@include file="/WEB-INF/view/include/sidenav.jsp" %>
+<main class="container">
+    <form:form modelAttribute="signupForm" class="col s12" action="/member/signup" method="post" id="signupForm">
+        <div class="row">
+            <div class="input-field col s7 ">
+                <i class="material-icons prefix">account_circle</i>
+                <form:input path="userId" id="userId" name="userId" type="text" placeholder="userId"
+                            class="validate"/>
+                <form:errors path="userId" cssClass="helper-text"/>
+                <span class="helper-text" id="idCheckMsg" style="display: none"></span>
+            </div>
+            <div class="input-field col s7 ">
+                <i class="material-icons prefix">account_circle</i>
+                <form:input path="password" id="password" name="password" type="password"
+                            placeholder="password"
+                            class="validate"/>
+                <form:errors path="password" cssClass="helper-text"/>
+            </div>
+            <div class="input-field col s7 ">
+                <i class="material-icons prefix">email</i>
+                <form:input path="email" id="email" name="email" type="email" placeholder="email"
+                            class="validate"/>
+                <form:errors path="email" cssClass="helper-text"/>
+            </div>
+            <div class="input-field col s7 ">
+                <i class="material-icons prefix">phone</i>
+                <form:input path="tel" id="tel" name="tel" type="tel" placeholder="tel"
+                            class="validate"/>
+                <form:errors path="tel" cssClass="helper-text"/>
+            </div>
+        </div>
+        <button class="btn waves-effect waves-light offset-s1" type="submit" name="action">
+            Submit
+            <i class="material-icons right">send</i>
+        </button>
+    </form:form>
 
-<div class="login-container">
-  <a href="main">
-    <img src="img/logo.png" alt="Grids & Circle 로고">
-  </a>
-
-  <div class="title-text">회원가입</div>
-
-  <% if (request.getAttribute("error") != null) { %>
-  <p style="color:red;"><%= request.getAttribute("error") %></p>
-  <% } %>
-
-  <form id="signupForm" action="signup" method="post" onsubmit="return validateForm()">
-    <div class="input-box">
-      <input type="text" name="userid" id="userid" placeholder="ID" required>
-      <button type="button" class="id-check-btn" onclick="checkDuplicateId()">중복확인</button>
-    </div>
-    <div class="input-box">
-      <input type="password" name="password" id="password" placeholder="Password" required>
-    </div>
-    <div class="input-box">
-      <input type="email" name="email" id="email" placeholder="Email" required>
-    </div>
-    <div class="input-box">
-      <input type="text" name="address" id="address" placeholder="주소" required>
-    </div>
-    <div class="input-box">
-      <input type="text" name="postnum" id="postnum" placeholder="우편번호" required>
-    </div>
-    <div class="input-box">
-      <input type="text" name="tel" id="tel" placeholder="전화번호" required>
-    </div>
-    <button type="submit" class="login-btn">회원가입</button>
-  </form>
-
-  <a href="login" class="signup-link">이미 계정이 있으신가요? 로그인</a>
-</div>
+</main>
+<%@include file="/WEB-INF/view/include/footer.jsp" %>
 
 <script>
-  let isIdChecked = false;
+        const validElement = document.querySelector('#idCheckMsg');
+        document.querySelector('#userId').addEventListener('focusout', async ev => {
+          const id = ev.target.id;
+          if (!id) return;
+          const response = await fetch('/api/member/exist/' + id);
+          const data = await response.json();
 
-  async function checkDuplicateId() {
-    const userId = document.getElementById('userid').value.trim();
+          console.log(data);
+          validElement.style.display = 'block';
+          validElement.textContent = data.data ? '사용이 불가능한 아이디입니다.' : '사용 가능한 아이디입니다.';
+        });
 
-    if (!userId) {
-      alert('ID를 입력해주세요.');
-      return;
-    }
+        document.querySelector('#signupForm').addEventListener('submit', async ev => {
+          // form tag 의 기본 이벤트 차단
+          ev.preventDefault();
+          const id = document.querySelector('#userId').value;
+          if (!id) return;
+          const response = await fetch('/api/member/exist/' + id);
+          const data = await response.json();
 
-    try {
-      const res = await fetch(`/api/check-id?userid=${encodeURIComponent(userId)}`);
-      const data = await res.json();
+          if (data.data) {
+            document.querySelector('#userId').focus();
+            validElement.textContent = '사용이 불가능한 아이디입니다.';
+            return;
+          }
 
-      if (data.exists) {
-        alert('이미 사용 중인 ID입니다.');
-        isIdChecked = false;
-      } else {
-        alert('사용 가능한 ID입니다.');
-        isIdChecked = true;
-      }
-    } catch (err) {
-      console.error('ID 중복확인 오류:', err);
-      alert('서버 오류가 발생했습니다. 다시 시도해주세요.');
-    }
-  }
-
-  function validateForm() {
-    if (!isIdChecked) {
-      alert('ID 중복확인을 해주세요.');
-      return false;
-    }
-
-    const requiredFields = ['userid', 'password', 'email', 'address', 'postnum', 'tel'];
-
-    for (let field of requiredFields) {
-      if (!document.getElementById(field).value.trim()) {
-        alert('모든 입력 항목을 작성해주세요.');
-        return false;
-      }
-    }
-
-    return true;
-  }
+          ev.target.submit();
+        });
 </script>
 
 </body>

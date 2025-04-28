@@ -51,6 +51,7 @@
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-acl:6.4.4" />
         </element>
       </element>
+      <element id="javaee-facet-resources" facet="1st_project/web/Web2" />
       <element id="javaee-facet-resources" facet="1st_project/web/Web" />
     </root>
   </artifact>

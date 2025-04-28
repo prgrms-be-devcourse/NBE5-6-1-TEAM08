@@ -4,12 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <title>Grids & Circle - 로그인</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/login.css">
 </head>
 <body>
 
 <div class="login-container">
   <a href="<%= request.getContextPath() %>/index.jsp">
-    <img src="<%= request.getContextPath() %>/img/logo.png" alt="Grids & Circle 로고">
+    <img src="${pageContext.request.contextPath}/assets/img/logo.png" alt="Grids & Circle Logo">
   </a>
 
   <form action="<%= request.getContextPath() %>/login" method="post">

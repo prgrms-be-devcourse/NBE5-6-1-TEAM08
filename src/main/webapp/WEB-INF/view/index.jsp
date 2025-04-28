@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%@ page import="javax.servlet.http.HttpSession" %>
+<%@ page import="jakarta.servlet.http.HttpSession" %>
 <%
 
   String username = (String) session.getAttribute("username");
@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/index.css">
 </head>
 <body>
 
@@ -21,23 +21,23 @@
   <div class="header-left"></div>
   <div class="logo">
     <a href="index.jsp">
-      <img src="img/logo.png" alt="Grids & Circle Logo">
+      <img src="${pageContext.request.contextPath}/assets/img/logo.png" alt="Grids & Circle Logo">
     </a>
   </div>
 
   <div class="header-right buttons">
     <% if (!isLoggedIn) { %>
-    <a href="login.jsp" id="loginBtn"><i class="fa-regular fa-user"></i></a>
-    <a href="login.jsp" id="cartBtn"><i class="fa-solid fa-cart-shopping"></i></a>
+    <a href="login" id="loginBtn"><i class="fa-regular fa-user"></i></a>
+    <a href="login" id="cartBtn"><i class="fa-solid fa-cart-shopping"></i></a>
     <% } else { %>
-    <a href="mypage.jsp" id="mypageBtn"><i class="fa-solid fa-user"></i></a>
-    <a href="logout.jsp" id="logoutBtn"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+    <a href="mypage" id="mypageBtn"><i class="fa-solid fa-user"></i></a>
+    <a href="logout" id="logoutBtn"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
     <% } %>
   </div>
 </header>
 
 <div class="banner">
-  <img src="img/welcome.jpg" alt="Coffee Banner">
+  <img src="${pageContext.request.contextPath}/assets/img/welcome.jpg" alt="Coffee Banner">
   <div class="banner-text">Welcome to Grids & Circle Coffee</div>
 </div>
 
