@@ -25,7 +25,7 @@ public class OrderService {
     public List<Order> getOrdersByEmail(String email) {
         List<Order> orders = orderRepository.findByEmail(email);
         if (orders == null || orders.isEmpty()) {
-            throw new OrderNotFoundException("해당 ID로 주문을 찾을 수 없습니다: " + email);
+            throw new OrderNotFoundException("해당 EMAIL로 주문을 찾을 수 없습니다: " + email);
         }
         return orders;
     }

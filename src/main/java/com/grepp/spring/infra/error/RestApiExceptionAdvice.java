@@ -1,6 +1,7 @@
 package com.grepp.spring.infra.error;
 
 import com.grepp.spring.infra.error.exceptions.CommonException;
+import com.grepp.spring.infra.error.exceptions.OrderNotFoundException;
 import com.grepp.spring.infra.response.ApiResponse;
 import com.grepp.spring.infra.response.ResponseCode;
 import java.util.LinkedHashMap;
@@ -48,5 +49,14 @@ public class RestApiExceptionAdvice {
         return ResponseEntity
                    .internalServerError()
                    .body(ApiResponse.error(ResponseCode.INTERNAL_SERVER_ERROR));
+    }
+
+    // Order API Error handler
+    @ExceptionHandler(OrderNotFoundException.class)
+    public ResponseEntity<ApiResponse<String>> orderNotFoundExceptionHandler(OrderNotFoundException ex) {
+        log.error("Order not found: {}", ex.getMessage(), ex);
+        return ResponseEntity
+            .status(404)  // 404 상태 코드
+            .body(ApiResponse.error(ResponseCode.NOT_FOUND, ex.getMessage()));
     }
 }
