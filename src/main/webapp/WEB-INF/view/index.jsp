@@ -1,23 +1,77 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@include file="/WEB-INF/view/include/page.jsp" %>
-<html>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ page import="jakarta.servlet.http.HttpSession" %>
+<%
+
+  String username = (String) session.getAttribute("username");
+  boolean isLoggedIn = (username != null);
+%>
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-    <title>Grepp</title>
-    <%@include file="/WEB-INF/view/include/static.jsp" %>
+  <meta charset="UTF-8">
+  <title>Grids & Circle - 메인화면 </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/index.css">
 </head>
 <body>
-<%@include file="/WEB-INF/view/include/header.jsp" %>
-<%@include file="/WEB-INF/view/include/sidenav.jsp" %>
-<main class="container">
-    <c:if test="${not empty param.error}">
-        <div class="card-panel red lighten-2 text-white">${param.error}</div>
-    </c:if>
-<h4>
-    index
-</h4>
 
-</main>
-<%@include file="/WEB-INF/view/include/footer.jsp" %>
+<header>
+  <div class="header-left"></div>
+  <div class="logo">
+    <a href="index.jsp">
+      <img src="${pageContext.request.contextPath}/assets/img/logo.png" alt="Grids & Circle Logo">
+    </a>
+  </div>
 
+  <div class="header-right buttons">
+    <% if (!isLoggedIn) { %>
+    <a href="login" id="loginBtn"><i class="fa-regular fa-user"></i></a>
+    <a href="login" id="cartBtn"><i class="fa-solid fa-cart-shopping"></i></a>
+    <% } else { %>
+    <a href="mypage" id="mypageBtn"><i class="fa-solid fa-user"></i></a>
+    <a href="logout" id="logoutBtn"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+    <% } %>
+  </div>
+</header>
+
+<div class="banner">
+  <img src="${pageContext.request.contextPath}/assets/img/welcome.jpg" alt="Coffee Banner">
+  <div class="banner-text">Welcome to Grids & Circle Coffee</div>
+</div>
+
+<div class="welcome-message">
+  -<br>
+  We sell only the best quality coffee beans<br>
+  -<br>
+</div>
+
+<main class="products" id="productList"></main>
+
+<script>
+  window.onload = async function () {
+    try {
+      const res = await fetch('/api/products');
+      const products = await res.json();
+      const productList = document.getElementById('productList');
+
+      productList.innerHTML = '';
+      products.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'product';
+        card.onclick = () => location.href = `product.jsp?id=${product.id}`;
+        card.innerHTML = `
+          <img src="${product.image}" alt="${product.title}">
+          <div class="product-title">${product.title}</div>
+        `;
+        productList.appendChild(card);
+      });
+    } catch (err) {
+      console.error('상품 목록을 불러오는 데 실패했습니다.', err);
+      document.getElementById('productList').innerHTML = '<p style="text-align:center;">상품을 불러오지 못했습니다.</p>';
+    }
+  };
+</script>
 </body>
 </html>

@@ -26,7 +26,7 @@ public class OrderController {
 
 
     // 회원 주문 조회
-    @PreAuthorize("hasAuthority('USER')")
+//    @PreAuthorize("hasAuthority('USER')")
     @GetMapping("/check")
     public String checkOrderForm(Model model, Principal principal) {
         if (principal != null) {
@@ -34,7 +34,7 @@ public class OrderController {
             String userId = principal.userId();
             List<Order> orders = orderService.getOrdersById(userId);
             model.addAttribute("orders", orders);
-            return "order/orderList";
+            return "userOrderlist";
         } else {
             // 비로그인 사용자
             return "order/emailForm"; // 이메일 입력받는 화면
@@ -49,14 +49,14 @@ public class OrderController {
     ){
         List<Order> orders = orderService.getOrdersByEmail(email);
         model.addAttribute("emailOrders", orders);
-        return "order/orderList";
+        return "userOrderlist";
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+//    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/admin")
     public String checkAllOrder(Model model) {
         List<Order> orders = orderService.getAllOrders();
         model.addAttribute("allOrders", orders);
-        return "order/allOrderList";
+        return "orderlist";
     }
 }
