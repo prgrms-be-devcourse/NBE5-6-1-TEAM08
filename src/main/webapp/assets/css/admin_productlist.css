@@ -52,27 +52,6 @@ header {
   color: #333;
 }
 
-.add-btn-wrap {
-  text-align: right;
-  margin-bottom: 20px;
-}
-
-.add-btn {
-  padding: 8px 16px;
-  background-color: #e3ded5;
-  color: #333;
-  border: 1px solid #333;
-  border-radius: 8px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.add-btn:hover {
-  background-color: #000;
-  color: #fff;
-}
-
 .order-table {
   width: 100%;
   border-collapse: collapse;

@@ -22,12 +22,17 @@ table {
 th, td {
   padding: 12px 10px;
   border-bottom: 1px solid #eee;
-  text-align: left;
 }
 
 th {
   background-color: #f5f5f5;
   font-weight: bold;
+  text-align: left;
+}
+
+td:nth-child(3),
+td:nth-child(6) {
+  text-align: right;
 }
 
 .empty-message {
@@ -36,3 +41,9 @@ th {
   color: #777;
 }
 
+.total-price {
+  margin-top: 20px;
+  text-align: right;
+  font-weight: bold;
+  font-size: 16px;
+}

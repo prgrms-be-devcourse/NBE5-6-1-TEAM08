@@ -12,7 +12,8 @@ header {
   padding: 20px 30px;
   background-color: #e3ded5;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  height:6vh;
+  height: 6vh;
+  position: relative;
 }
 
 .logo {
@@ -25,10 +26,26 @@ header {
   height: 60px;
 }
 
+.buttons a {
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: #6a6a6a;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: all 0.2s;
+  font-size: 18px;
+}
+
+.buttons a:hover {
+  background-color: transparent;
+  color: black;
+}
+
 .banner {
   position: relative;
   text-align: center;
-  margin-top: 0px;
+  margin-top: 0;
 }
 
 .banner img {
@@ -57,21 +74,6 @@ header {
   font-weight: lighter;
   margin-top: 35px;
   color: #000000;
-}
-
-.buttons a {
-  background-color: transparent;
-  border: 1px solid transparent;
-  color: #6a6a6a;
-  padding: 10px 20px;
-  border-radius: 5px;
-  text-decoration: none;
-  transition: all 0.2s;
-}
-
-.buttons a:hover {
-  background-color: transparent;
-  color: black;
 }
 
 .products {
@@ -115,4 +117,3 @@ header {
   color: #333333;
   text-decoration: none;
 }
-

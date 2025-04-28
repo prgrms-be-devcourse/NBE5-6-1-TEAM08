@@ -4,16 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Grids & Circle - 로그인</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/login.css">
 </head>
 <body>
 
 <div class="login-container">
   <a href="<%= request.getContextPath() %>/index.jsp">
-    <img src="${pageContext.request.contextPath}/assets/img/logo.png" alt="Grids & Circle Logo">
+    <img src="<%= request.getContextPath() %>/img/logo.png" alt="Grids & Circle 로고">
   </a>
 
   <form action="<%= request.getContextPath() %>/login" method="post">
@@ -33,8 +30,17 @@
     </div>
   </form>
 
-  <a href="<%= request.getContextPath() %>/signup.jsp" class="signup-link">JOIN US</a>
-  <a href="<%= request.getContextPath() %>/guest_login.jsp" class="signup-link" style="font-size: 13px; color: #555;">비회원 로그인</a>
+  <div class="links">
+    <a href="${pageContext.request.contextPath}/signup" class="signup-link">JOIN US</a>
+    <a href="<%= request.getContextPath() %>/guest_login.jsp" class="signup-link" style="font-size: 13px; color: #555;">비회원 로그인</a>
+  </div>
+
+  <%-- 로그인 실패 시 에러메시지 표시 --%>
+  <c:if test="${not empty param.error}">
+    <div class="error-message" style="color: red; margin-top: 10px; font-size: 14px;">
+      아이디 또는 비밀번호가 올바르지 않습니다.
+    </div>
+  </c:if>
 </div>
 
 </body>

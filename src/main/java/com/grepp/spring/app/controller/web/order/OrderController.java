@@ -26,7 +26,7 @@ public class OrderController {
 
 
     // 회원 주문 조회
-//    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('USER')")
     @GetMapping("/check")
     public String checkOrderForm(Model model, Principal principal) {
         if (principal != null) {
@@ -56,11 +56,11 @@ public class OrderController {
         return "userOrderlist";
     }
 
-//    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/admin")
     public String checkAllOrder(Model model) {
         List<Order> orders = orderService.getAllOrders();
         model.addAttribute("allOrders", orders);
-        return "orderlist";
+        return "admin_orderlist";
     }
 }

@@ -24,4 +24,9 @@ public class LoginController {
     public String successfulLogin() {
         return "index";
     }
+
+    @GetMapping("/signup")
+    public String showSignupPage() {
+        return "view/signup";
+    }
 }

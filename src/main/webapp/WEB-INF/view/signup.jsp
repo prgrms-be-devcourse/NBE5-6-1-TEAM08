@@ -18,7 +18,8 @@
   <p style="color:red;"><%= request.getAttribute("error") %></p>
   <% } %>
 
-  <form id="signupForm" action="signup" method="post" onsubmit="return validateForm()">
+  <!--  form 수정: action 삭제, onsubmit으로 fetch 요청 -->
+  <form id="signupForm" onsubmit="submitSignupForm(); return false;">
     <div class="input-box">
       <input type="text" name="userid" id="userid" placeholder="ID" required>
       <button type="button" class="id-check-btn" onclick="checkDuplicateId()">중복확인</button>
@@ -41,7 +42,7 @@
     <button type="submit" class="login-btn">회원가입</button>
   </form>
 
-  <a href="login.jsp" class="signup-link">이미 계정이 있으신가요? 로그인</a>
+  <a href="/login" class="signup-link">이미 계정이 있으신가요? 로그인</a>
 </div>
 
 <script>
@@ -56,38 +57,52 @@
     }
 
     try {
-      const res = await fetch(`/api/check-id?userid=${encodeURIComponent(userId)}`);
-      const data = await res.json();
+      const res = await fetch(`/api/users/check-id?username=${encodeURIComponent(userId)}`);
+      const data = await res.text(); // (서버가 문자열을 리턴하니까)
 
-      if (data.exists) {
-        alert('이미 사용 중인 ID입니다.');
-        isIdChecked = false;
-      } else {
-        alert('사용 가능한 ID입니다.');
-        isIdChecked = true;
-      }
+      alert(data.includes('가능') ? '사용 가능한 ID입니다.' : '이미 사용 중인 ID입니다.');
+      isIdChecked = data.includes('가능');
     } catch (err) {
       console.error('ID 중복확인 오류:', err);
       alert('서버 오류가 발생했습니다. 다시 시도해주세요.');
     }
   }
 
-  function validateForm() {
+  async function submitSignupForm() {
     if (!isIdChecked) {
       alert('ID 중복확인을 해주세요.');
       return false;
     }
 
-    const requiredFields = ['userid', 'password', 'email', 'address', 'postnum', 'tel'];
+    const userData = {
+      username: document.getElementById('userid').value.trim(),
+      password: document.getElementById('password').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      address: document.getElementById('address').value.trim(),
+      postnum: document.getElementById('postnum').value.trim(),
+      tel: document.getElementById('tel').value.trim()
+    };
 
-    for (let field of requiredFields) {
-      if (!document.getElementById(field).value.trim()) {
-        alert('모든 입력 항목을 작성해주세요.');
-        return false;
+    try {
+      const res = await fetch('/api/users/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userData)
+      });
+
+      if (res.ok) {
+        alert('회원가입 성공!');
+        window.location.href = '/login';
+      } else {
+        const errorMessage = await res.text();
+        alert('회원가입 실패: ' + errorMessage);
       }
+    } catch (err) {
+      console.error('회원가입 요청 오류:', err);
+      alert('서버 오류가 발생했습니다.');
     }
-
-    return true;
   }
 </script>
 

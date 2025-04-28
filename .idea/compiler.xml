@@ -8,13 +8,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="spring" />
-        <module name="g-coffemanager" />
+        <module name="mvc" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="g-coffemanager" options="-parameters" />
+      <module name="mvc" options="-parameters" />
       <module name="spring" options="-parameters" />
     </option>
   </component>

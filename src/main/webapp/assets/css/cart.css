@@ -4,7 +4,6 @@ body {
   background-color: #e3ded5;
 }
 
-/* 헤더 영역 */
 header {
   display: flex;
   justify-content: center;
@@ -18,14 +17,12 @@ header {
   height: 60px;
 }
 
-/* 메인 컨테이너 */
 .container {
   display: flex;
   gap: 20px;
   padding: 20px;
 }
 
-/* 왼쪽 박스 */
 .left-box {
   flex: 2;
   background: #fff;
@@ -33,7 +30,6 @@ header {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* 장바구니 항목 */
 .cart-item {
   display: flex;
   align-items: center;
@@ -49,7 +45,6 @@ header {
   border-radius: 5px;
 }
 
-/* 상품 정보 */
 .cart-info {
   flex: 1;
   display: flex;
@@ -68,7 +63,6 @@ header {
   margin: 5px 0;
 }
 
-/* 가격 정보 */
 .price-info {
   font-size: 13px;
   font-weight: bold;
@@ -77,20 +71,11 @@ header {
   right: 0;
 }
 
-/* 수량 조절 박스 */
 .quantity-box {
   display: flex;
   align-items: center;
   gap: 5px;
   margin-top: 5px;
-}
-
-.quantity-box button {
-  background: #eee;
-  border: none;
-  padding: 5px 8px;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
 .quantity-box input {
@@ -99,7 +84,6 @@ header {
   border: 1px solid #ccc;
 }
 
-/* 삭제 버튼 */
 .remove-btn {
   background: transparent;
   border: none;
@@ -113,7 +97,6 @@ header {
   color: #e74c3c;
 }
 
-/* 요약 */
 .summary {
   text-align: right;
   margin-top: 20px;
@@ -128,7 +111,6 @@ header {
   font-size: 16px;
 }
 
-/* 하단 버튼 */
 .actions {
   margin-top: 20px;
   display: flex;
@@ -146,4 +128,30 @@ header {
 .actions button:hover {
   background: #000;
   color: #fff;
+}
+
+.mypage-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e3ded5;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.mypage-btn:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.mypage-btn i {
+  font-size: 18px;
+  color: #333;
 }
