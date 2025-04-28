@@ -1,12 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.grepp.spring.app.model.order.dto.Order" %>
-<%--<%@ page import="model.Order" %> <!-- 주문 정보를 담은 Order 클래스가 있다고 가정-->--%>
-
-<%--<%--%>
-<%--    // 주문 목록을 가져온다고 가정--%>
-<%--    List<Order> orderList = (List<Order>) request.getAttribute("orderList");--%>
-<%--%>--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -22,32 +17,35 @@
 
 <h2>주문 내역 확인</h2>
 
-<% if (orderList != null && !orderList.isEmpty()) { %>
-<table>
-  <thead>
-  <tr>
-    <th>상품명</th>
-    <th>수량</th>
-    <th>주문일</th>
-    <th>상태</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% for (Order order : orderList) { %>
-  <tr>
-    <td><%= order.getProductName() %></td>
-    <td><%= order.getQuantity() %></td>
-    <td><%= order.getOrderDate() %></td>
-    <td><%= order.getStatus() %></td>
-  </tr>
-  <% } %>
-  </tbody>
-</table>
-<% } else { %>
-<div class="empty-message">
-  주문 내역이 없습니다.
-</div>
-<% } %>
+<%-- 주문 내역이 존재하는 경우 --%>
+<c:if test="${not empty orders}">
+  <table>
+    <thead>
+    <tr>
+      <th>상품명</th>
+      <th>수량</th>
+      <th>주문일</th>
+        <%--      <th>상태</th>--%>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach var="order" items="${orders}">
+      <tr>
+        <td>${order.productName}</td>
+        <td>${order.orderCnt}</td>
+        <td>${order.orderDate}</td>
+          <%--        <td>${order.status}</td>--%>
+      </tr>
+    </c:forEach>
+    </tbody>
+  </table>
+  <%-- 주문 내역이 없는 경우 --%>
+</c:if>
+<c:if test="${empty orders}">
+  <div class="empty-message">
+    주문 내역이 없습니다.
+  </div>
+</c:if>
 
 </body>
 </html>

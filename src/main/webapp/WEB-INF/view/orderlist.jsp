@@ -16,7 +16,6 @@
   <thead>
   <tr>
     <th>주문 ID</th>
-<%--    <th>고객명</th>--%>
     <th>이메일</th>
     <th>상품명</th>
     <th>수량</th>
@@ -28,7 +27,6 @@
   <c:forEach var="order" items="${allOrders}">
     <tr>
       <td>${order.userId}</td>
-<%--      <td>${order.customerName}</td>--%>
       <td>${order.email}</td>
       <td>${order.productName}</td>
       <td>${order.orderCnt}</td>

@@ -31,13 +31,17 @@ public class OrderController {
     public String checkOrderForm(Model model, Principal principal) {
         if (principal != null) {
             // 로그인 사용자
-            String userId = principal.userId();
+            String userId = principal.userId();  // Principal 객체에서 userId 가져오기
+            log.debug("user id : {}", userId);  // 로그 출력시 {}를 사용하여 userId를 출력
+
+            // 주문 목록 가져오기
             List<Order> orders = orderService.getOrdersById(userId);
-            model.addAttribute("orders", orders);
-            return "userOrderlist";
+            model.addAttribute("orders", orders);  // 모델에 주문 목록 추가
+            return "userOrderlist";  // 로그인한 사용자에게 주문 목록 페이지 반환
         } else {
             // 비로그인 사용자
-            return "order/emailForm"; // 이메일 입력받는 화면
+            log.debug("No logged-in user found");  // 비로그인 사용자 로그
+            return "order/emailForm";  // 이메일 입력받는 화면 반환
         }
     }
 

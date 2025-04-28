@@ -5,11 +5,10 @@ import lombok.Data;
 import org.apache.ibatis.type.Alias;
 
 @Data
-@Alias("Order")
 public class Order {
     private String productName;
     private String email;
     private String userId;
     private Integer orderCnt;
-    private LocalDateTime orderDate;
+    private LocalDateTime orderDate = LocalDateTime.now();
 }
